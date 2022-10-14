@@ -418,7 +418,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the freet already exists in the hall of fame
 
 
-#### `DELETE /api/freets/halloffame` - Delete Freets to Hall of Fame
+#### `DELETE /api/freets/halloffame` - Delete Freets from Hall of Fame
 
 **Body**
 - `freeid` _{string}_ - The freet id to be deleted from the hall of fame
