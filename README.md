@@ -221,7 +221,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
 
-#### `PUT /api/freets/:freetId?` - Update an existing freet
+#### `PUT /api/freets/:freetId?` - Update an existing freet (timed edit concept)
 
 **Body**
 
@@ -313,3 +313,247 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+
+#### `POST /api/users/relationships` - Add User Relationship Status
+
+**Body**
+
+- `relationship_status` _{string}_ - The user's relationship status
+- `users` _{User}_ - The user's best friends list(set of other users)
+
+**Returns**
+- A success message
+- An object with the created user's details (without password and with relationship status/other user best friends)
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the relationship status is in wrong format
+- `400` if a user best friend does not exist
+
+
+#### `PUT /api/users/relationships` - Update User Relationship Status
+
+**Body**(no need to add fields that are not being changed)
+
+- `relationship_status` _{string}_ - The user's relationship status
+- `users` _{User}_ - The user's best friends list(set of other users)
+
+**Returns**
+- A success message
+- An object with the updated user's details (without password and with relationship status/other user best friends)
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if a user best friend does not exist
+
+#### `GET /api/users/relationships?user=USERNAME` - Get all relationships by a user
+
+**Returns**
+
+- An object containing an array of best friends for the user `user` and the user `user` relationship status
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if `user` is not given
+
+
+#### `POST /api/users/enemies` - Add User Enemies
+
+**Body**
+- `enemies_list` _{Users}_ - The user's enemies list(set of other Users)
+
+**Returns**
+- A success message
+- An object with the user's details (without password and with enemies list)
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if a user enemy does not exist
+
+
+#### `PUT /api/users/enemies` - Update User Enemies
+
+**Body**(no need to add fields that are not being changed)
+
+- `enemies` _{User}_ - The user's enemies list(set of other users)
+
+**Returns**
+- A success message
+- An object with the updated user's details (without password and with other user best friends)
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if a user enemy does not exist
+
+#### `GET /api/users/enemies?user=USERNAME` - Get all enemies by a user
+
+**Returns**
+
+- An array of enemies for the user `user`
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if `user` is not given
+
+#### `POST /api/freets/halloffame` - Add Freets to Hall of Fame
+
+**Body**
+- `freeid` _{string}_ - The freet id to be placed into hall of fame
+
+**Returns**
+- A success message
+- An object with the user's freets that are in the hall of fame
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the freet does not exist
+- `400` if the freet already exists in the hall of fame
+
+
+#### `DELETE /api/freets/halloffame` - Delete Freets to Hall of Fame
+
+**Body**
+- `freeid` _{string}_ - The freet id to be deleted from the hall of fame
+
+**Returns**
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+
+
+#### `GET /api/freets/halloffame?author=USERNAME` - Get all hall of fame freets by author
+
+**Returns**
+
+- An array of freets in the username `author`'s hall of fame
+
+**Throws**
+
+- `400` if `author` is not given
+- `404` if `author` is not a recognized username of any user
+
+
+
+#### `POST /api/exampleFreets` - Add Example Freets
+
+**Body**
+- `content` _{string}_ - The content of the example freet by the author
+
+**Returns**
+- A success message
+- An object with the user's example freets
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the format of an example freet is not correct
+
+
+#### `DELETE /api/exampleFreets` - Delete Example Freets
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+
+
+#### `GET /api/exampleFreets?author=${fields.author}` - Get all example freets by an author
+
+**Returns**
+
+- An array of example freets for the author `author`
+
+**Throws**
+
+- `400` if `author` is not given
+
+
+#### `POST /api/users/personal` - Mark users personal 
+
+**Body**
+- `users` _{Users}_ - An array of users to be marked as personal
+
+**Returns**
+- A success message
+- An array of users with their marked statuses
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if any of the users don't exist
+
+
+#### `POST /api/users/corporate` - Mark users corporate 
+
+**Body**
+- `users` _{Users}_ - An array of users to be marked as corporate
+
+**Returns**
+- A success message
+- An array of users with their marked statuses
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if any of the users don't exist
+
+
+#### `GET /api/freets/personal?author=USERNAME` - Get all personal freets by author 
+
+**Returns**
+
+- An array of freets that are marked as personal by the author `author` (which is automated with the marking of users as all freets by a user marked personal are also personal)
+
+**Throws**
+
+- `400` if `author` is not given
+
+
+#### `GET /api/freets/corporate?author=USERNAME` - Get all corporate freets by author 
+
+**Returns**
+
+- An array of freets that are marked as corporate by the author `author` (which is automated with the marking of users as all freets by a user marked corporate are also corporate)
+
+**Throws**
+
+- `400` if `author` is not given
+
+
+#### `PUT /api/users/credibilitycredits` - Update User Credibility Credits
+
+**Body**(no need to add fields that are not being changed)
+
+- `credits` _{Number}_ - The user's updated credibility credits number
+
+**Returns**
+- A success message
+- An object with the updated user's details (without password and with updated credibility credits number)
+
+**Throws**
+
+- `403` if the user is not logged in
+
+
+#### `GET /api/users/credibilitycredits?author=USERNAME` - Get crediblity credits for an author
+
+**Returns**
+
+- An object of crediblity credits number and a status as to the color of the verified Twitter icon
+
+**Throws**
+
+- `400` if `author` is not given
