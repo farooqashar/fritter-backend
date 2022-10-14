@@ -10,10 +10,14 @@ function showObject(obj) {
 }
 
 function showResponse(response) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   response.json().then(data => {
     showObject({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       data,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       status: response.status,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       statusText: response.statusText
     });
   });
@@ -38,7 +42,8 @@ const formsAndHandlers = {
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
   'edit-freet': editFreet,
-  'delete-freet': deleteFreet
+  'delete-freet': deleteFreet,
+  'create-example-freet': createExampleFreet
 };
 
 // Attach handlers to forms
