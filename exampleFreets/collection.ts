@@ -11,7 +11,7 @@ class ExampleFreetCollection {
      * @param {string} content - The id of the content of the ExampleFreet
      * @return {Promise<HydratedDocument<ExampleFreet>>} - The newly created ExampleFreet
      */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<ExampleFreetModel>> {
+  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<ExampleFreet>> {
     const exampleFreet = new ExampleFreetModel({
       authorId,
       content
@@ -39,7 +39,7 @@ class ExampleFreetCollection {
    */
   static async deleteOne(exampleFreetId: Types.ObjectId | string): Promise<boolean> {
     const exampleFreet = await ExampleFreetModel.deleteOne({_id: exampleFreetId});
-    return freet !== null;
+    return exampleFreetId !== null;
   }
 }
 

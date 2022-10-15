@@ -15,7 +15,7 @@ export type ExamplePopulatedFreet = {
   content: string;
 };
 
-const ExampleFreetSchema = new Schema<Freet>({
+const ExampleFreetSchema = new Schema<ExampleFreet>({
   // The author userId
   authorId: {
     // Use Types.ObjectId outside of the schema

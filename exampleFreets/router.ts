@@ -87,3 +87,5 @@ router.delete(
     });
   }
 );
+
+export {router as exampleFreetRouter};
