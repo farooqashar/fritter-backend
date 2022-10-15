@@ -10,18 +10,18 @@ const router = express.Router();
 /**
  * Get exampleFreets by author.
  *
- * @name GET /api/exampleFreets?authorId=id
+ * @name GET /api/exampleFreets?author=id
  *
- * @return {ExampleFreetResponse[]} - An array of exampleFreets created by user with id, authorId
- * @throws {400} - If authorId is not given
- * @throws {404} - If no user has given authorId
+ * @return {ExampleFreetResponse[]} - An array of exampleFreets created by user with id, author
+ * @throws {400} - If author is not given
+ * @throws {404} - If no user has given author
  *
  */
 router.get(
   '/',
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if authorId query parameter was supplied
-    if (req.query.authorId === undefined) {
+    if (req.query.author === undefined) {
       res.status(400).json('{error: authorId is not provided}');
     }
 
@@ -31,8 +31,7 @@ router.get(
     userValidator.isAuthorExists
   ],
   async (req: Request, res: Response) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const authorExampleFreets = await ExampleFreetCollection.findAllByUsername(req.query.authorId as string);
+    const authorExampleFreets = await ExampleFreetCollection.findAllByUsername(req.query.author as string);
     res.status(200).json(authorExampleFreets);
   }
 );
@@ -55,7 +54,6 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const exampleFreet = await ExampleFreetCollection.addOne(userId, req.body.content);
     res.status(201).json({
       message: 'Your exampleFreet was created successfully.',
@@ -80,7 +78,6 @@ router.delete(
     userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await ExampleFreetCollection.deleteOne(req.params.exampleFreetId);
     res.status(200).json({
       message: 'Your exampleFreet was deleted successfully.'

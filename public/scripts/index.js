@@ -43,7 +43,9 @@ const formsAndHandlers = {
   'create-freet': createFreet,
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
-  'create-example-freet': createExampleFreet
+  'create-example-freet': createExampleFreet,
+  'delete-example-freet': deleteExampleFreet,
+  'view-example-freets-by-author': viewExampleFreetsByAuthor
 };
 
 // Attach handlers to forms
