@@ -7,14 +7,14 @@ export type UserRelationship = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   user: Types.ObjectId;
   relationshipStatus: string;
-//   BestFriends: string[];
+  bestFriends: string[];
 };
 
 export type UserRelationshipPopulated = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   user: Types.ObjectId;
   relationshipStatus: string;
-//   BestFriends: string[];
+  bestFriends: string[];
 };
 
 const UserRelationshipStatusSchema = new Schema<UserRelationship>({
@@ -28,10 +28,10 @@ const UserRelationshipStatusSchema = new Schema<UserRelationship>({
   // The user relationship status
   relationshipStatus: {
     type: String
-  }
-//   BestFriends: [{
-//     type: String
-//   }]
+  },
+  bestFriends: [{
+    type: String
+  }]
 });
 
 const UserRelationshipModel = model<UserRelationship>('UserRelationship', UserRelationshipStatusSchema);

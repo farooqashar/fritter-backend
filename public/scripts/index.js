@@ -46,7 +46,9 @@ const formsAndHandlers = {
   'create-example-freet': createExampleFreet,
   'delete-example-freet': deleteExampleFreet,
   'view-example-freets-by-author': viewExampleFreetsByAuthor,
-  'add-user-relationship-status': createUserRelationship
+  'add-user-relationship-status': createUserRelationship,
+  'update-user-relationship-status': updateUserRelationship,
+  'view-user-relationship-status': getUserRelationship
 };
 
 // Attach handlers to forms

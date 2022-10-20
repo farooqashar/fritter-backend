@@ -156,10 +156,34 @@
               <option value="married">Married</option>
               <option value="complicated">Complicated</option>
             </select>
-            <!-- <label for="bestFriends">Best Friends (Enter array of user ids): </label>
-            <input id="bestFriends" name="bestFriends"> -->
+            <label for="bestFriends">Best Friends (Enter user ids separated by comma): </label>
+            <input id="bestFriends" name="bestFriends">
           </div>
           <input type="submit" value="Add User Relationship">
+        </form>
+
+        <form id="update-user-relationship-status">
+          <h3>Update User Relationship Status</h3>
+          <div>
+            <label for="relationshipStatus">New Relationship Status: </label>
+            <select name="relationshipStatus" id="relationshipStatus">
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="complicated">Complicated</option>
+            </select>
+            <label for="bestFriends">New Best Friends (Enter user ids separated by comma): </label>
+            <input id="bestFriends" name="bestFriends">
+          </div>
+          <input type="submit" value="Update User Relationship">
+        </form>
+
+        <form id="view-user-relationship-status">
+          <h3>View Relationship Status By User</h3>
+          <div>
+            <label for="userId">User Id:</label>
+            <input id="userId" name="userId">
+          </div>
+          <input type="submit" value="View Relationship Status By User">
         </form>
 
       </div>

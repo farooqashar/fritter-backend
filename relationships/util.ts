@@ -6,7 +6,7 @@ import type {UserRelationship, UserRelationshipPopulated} from './model';
 type UserRelationshipObjectResponse = {
   _id: string;
   relationshipStatus: string;
-//   BestFriends: string[];
+  bestFriends: string[];
 };
 
 /**
@@ -26,7 +26,6 @@ export const constructUserRelationshipResponse = (relationObject: HydratedDocume
   return {
     ...userRelationship,
     _id: userRelationship._id.toString()
-
   };
 };
 
