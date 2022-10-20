@@ -8,6 +8,7 @@
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/exampleFreets.js"></script>
   <script src="/scripts/user.js"></script>
+  <script src="/scripts/relationships.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -144,6 +145,21 @@
             <input id="author" name="author">
           </div>
           <input type="submit" value="View Example Freets By Author">
+        </form>
+
+        <form id="add-user-relationship-status">
+          <h3>Add User Relationship Status</h3>
+          <div>
+            <label for="relationshipStatus">Relationship Status: </label>
+            <select name="relationshipStatus" id="relationshipStatus">
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="complicated">Complicated</option>
+            </select>
+            <!-- <label for="bestFriends">Best Friends (Enter array of user ids): </label>
+            <input id="bestFriends" name="bestFriends"> -->
+          </div>
+          <input type="submit" value="Add User Relationship">
         </form>
 
       </div>
