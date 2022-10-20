@@ -48,7 +48,10 @@ const formsAndHandlers = {
   'view-example-freets-by-author': viewExampleFreetsByAuthor,
   'add-user-relationship-status': createUserRelationship,
   'update-user-relationship-status': updateUserRelationship,
-  'view-user-relationship-status': getUserRelationship
+  'view-user-relationship-status': getUserRelationship,
+  'add-user-enemies': createUserEnemies,
+  'update-user-enemies': updateUserEnemies,
+  'view-user-enemies': getUserEnemies
 };
 
 // Attach handlers to forms

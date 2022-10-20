@@ -9,6 +9,7 @@
   <script src="/scripts/exampleFreets.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/relationships.js"></script>
+  <script src="/scripts/enemies.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -184,6 +185,33 @@
             <input id="userId" name="userId">
           </div>
           <input type="submit" value="View Relationship Status By User">
+        </form>
+
+        <form id="add-user-enemies">
+          <h3>Add User Enemies</h3>
+          <div>
+            <label for="enemies">Enemies (Enter user ids separated by comma): </label>
+            <input id="enemies" name="enemies">
+          </div>
+          <input type="submit" value="Add User Enemies">
+        </form>
+
+        <form id="update-user-enemies">
+          <h3>Update User Enemies</h3>
+          <div>
+            <label for="enemies">Updated Enemies (Enter user ids separated by comma): </label>
+            <input id="enemies" name="enemies">
+          </div>
+          <input type="submit" value="Update User Enemies">
+        </form>
+
+        <form id="view-user-enemies">
+          <h3>View Enemies By User</h3>
+          <div>
+            <label for="userId">User Id:</label>
+            <input id="userId" name="userId">
+          </div>
+          <input type="submit" value="View Enemies By User">
         </form>
 
       </div>
