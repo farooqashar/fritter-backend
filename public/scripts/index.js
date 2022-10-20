@@ -51,7 +51,12 @@ const formsAndHandlers = {
   'view-user-relationship-status': getUserRelationship,
   'add-user-enemies': createUserEnemies,
   'update-user-enemies': updateUserEnemies,
-  'view-user-enemies': getUserEnemies
+  'view-user-enemies': getUserEnemies,
+  'init-hof': initHOF,
+  'toggle-freets-hof': toggleHOFFreets,
+  'view-user-hof': viewHallOfFameByUser,
+  'update-user-credibility': updateCredibilityCredits,
+  'view-credibility-credits': getUserCredibility
 };
 
 // Attach handlers to forms

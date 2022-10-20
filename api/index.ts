@@ -14,6 +14,8 @@ import {freetRouter} from '../freet/router';
 import {exampleFreetRouter} from '../exampleFreets/router';
 import {userRelationshipRouter} from '../relationships/router';
 import {enemiesRouter} from '../enemies/router';
+import {HOFRouter} from '../halloffame/router';
+import {credibilityCreditRouter} from '../credibilitycredits/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -82,6 +84,8 @@ app.use('/api/freets', freetRouter);
 app.use('/api/exampleFreets', exampleFreetRouter);
 app.use('/api/users/relationships', userRelationshipRouter);
 app.use('/api/users/enemies', enemiesRouter);
+app.use('/api/halloffame', HOFRouter);
+app.use('/api/users/credibilitycredits', credibilityCreditRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {
