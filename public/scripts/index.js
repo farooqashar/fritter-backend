@@ -61,7 +61,8 @@ const formsAndHandlers = {
   'update-user-following': updateUserFollowing,
   'view-user-following': getUserFollowing,
   'update-personal-corporate': updateTimeline,
-  'view-personal-corporate': getTimelineByUser
+  'view-personal-corporate': getTimelineByUser,
+  'change-bio': changeBio
 };
 
 // Attach handlers to forms

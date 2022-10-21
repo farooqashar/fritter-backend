@@ -77,6 +77,10 @@ class UserCollection {
       user.username = userDetails.username as string;
     }
 
+    if (userDetails.bio) {
+      user.bio = userDetails.bio as string;
+    }
+
     await user.save();
     return user;
   }
