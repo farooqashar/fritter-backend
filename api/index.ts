@@ -16,6 +16,7 @@ import {userRelationshipRouter} from '../relationships/router';
 import {enemiesRouter} from '../enemies/router';
 import {HOFRouter} from '../halloffame/router';
 import {credibilityCreditRouter} from '../credibilitycredits/router';
+import {followRouter} from '../follow/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -77,13 +78,13 @@ app.use(userValidator.isCurrentSessionUserExists);
 app.get('/', (req: Request, res: Response) => {
   res.render('index');
 });
-
 // Add routers from routes folder
 app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
 app.use('/api/exampleFreets', exampleFreetRouter);
 app.use('/api/users/relationships', userRelationshipRouter);
 app.use('/api/users/enemies', enemiesRouter);
+app.use('/api/users/following', followRouter);
 app.use('/api/halloffame', HOFRouter);
 app.use('/api/users/credibilitycredits', credibilityCreditRouter);
 

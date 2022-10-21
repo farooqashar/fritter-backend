@@ -26,7 +26,6 @@ router.post(
     const enemyObj = await EnemiesCollection.addEnemyObject(userId, req.body.enemies);
     res.status(201).json({
       message: 'Your Enemy object was created successfully.',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       enemyObject: util.constructEnemiesResponse(enemyObj)
     });
   }
@@ -51,7 +50,6 @@ router.put(
     const newEnemy = await EnemiesCollection.updateEnemies(userId, req.body);
     res.status(200).json({
       message: 'Your Enemies were updated successfully.',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       newEnemy: util.constructEnemiesResponse(newEnemy)
     });
   }
@@ -76,7 +74,6 @@ router.get(
     }
 
     const enemyObject = await EnemiesCollection.findEnemiesByUser(req.query.userId as string);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const response = util.constructEnemiesResponse(enemyObject);
     res.status(200).json(response);
   }

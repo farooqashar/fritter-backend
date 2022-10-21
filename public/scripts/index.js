@@ -56,7 +56,10 @@ const formsAndHandlers = {
   'toggle-freets-hof': toggleHOFFreets,
   'view-user-hof': viewHallOfFameByUser,
   'update-user-credibility': updateCredibilityCredits,
-  'view-credibility-credits': getUserCredibility
+  'view-credibility-credits': getUserCredibility,
+  'add-user-following': createUserFollowing,
+  'update-user-following': updateUserFollowing,
+  'view-user-following': getUserFollowing
 };
 
 // Attach handlers to forms
