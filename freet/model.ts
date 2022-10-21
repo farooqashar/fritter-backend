@@ -21,6 +21,7 @@ export type Freet = {
   sadness: number;
   reports: number;
   edited: boolean;
+  source: string;
 };
 
 export type PopulatedFreet = {
@@ -36,6 +37,7 @@ export type PopulatedFreet = {
   sadness: number;
   reports: number;
   edited: boolean;
+  source: string;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -84,6 +86,9 @@ const FreetSchema = new Schema<Freet>({
   },
   edited: {
     type: Boolean
+  },
+  source: {
+    type: String
   }
 });
 

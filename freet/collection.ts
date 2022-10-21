@@ -16,17 +16,31 @@ class FreetCollection {
    * Add a freet to the collection
    *
    * @param {string} authorId - The id of the author of the freet
-   * @param {string} content - The id of the content of the freet
+   * @param {Record<string, unknown>} objectInfo - object with the info for freet
    * @return {Promise<HydratedDocument<Freet>>} - The newly created freet
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
+  static async addOne(authorId: Types.ObjectId | string, objectInfo: any): Promise<HydratedDocument<Freet>> {
     const date = new Date();
+    if (objectInfo.source) {
+      const freet = new FreetModel({
+        authorId,
+        dateCreated: date,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        content: objectInfo.content,
+        dateModified: date,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        source: objectInfo.source
+      });
+      await freet.save(); // Saves freet to MongoDB
+      return freet.populate('authorId');
+    }
+
     const freet = new FreetModel({
       authorId,
       dateCreated: date,
-      content,
-      dateModified: date
-    });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      content: objectInfo.content,
+      dateModified: date});
     await freet.save(); // Saves freet to MongoDB
     return freet.populate('authorId');
   }
@@ -67,17 +81,8 @@ class FreetCollection {
    *
    * @param {string} freetId - The id of the freet to be updated
    * @param {Record<string, unknown>} updateObj - object with some updated information
-  //  * @param {string} content? - The new content of the freet
-  //  * @param {number} likes? - likes
-  //  * @param {number} laughs? - laughs
-  //  * @param {number} loves? - loves
-  //  * @param {number} angries? - angries
-  //  * @param {number} sadness? - sadness
-  //  * @param {number} reports? - reports
    * @return {Promise<HydratedDocument<Freet>>} - The newly updated freet
    */
-
-  // content?: string, likes?: number, laughs?: number, loves?: number, angries?: number, sadness?: number, reports?: number
   static async updateOne(freetId: Types.ObjectId | string, updateObj: any): Promise<HydratedDocument<Freet>> {
     const freet = await FreetModel.findOne({_id: freetId});
     if (updateObj.content) {
@@ -115,6 +120,11 @@ class FreetCollection {
     if (updateObj.reports) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       freet.reports = updateObj.reports;
+    }
+
+    if (updateObj.source) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.source = updateObj.source;
     }
 
     await freet.save();
