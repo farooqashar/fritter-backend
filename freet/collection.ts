@@ -63,16 +63,60 @@ class FreetCollection {
   }
 
   /**
-   * Update a freet with the new content
+   * Update a freet with the any new information
    *
    * @param {string} freetId - The id of the freet to be updated
-   * @param {string} content - The new content of the freet
+   * @param {Record<string, unknown>} updateObj - object with some updated information
+  //  * @param {string} content? - The new content of the freet
+  //  * @param {number} likes? - likes
+  //  * @param {number} laughs? - laughs
+  //  * @param {number} loves? - loves
+  //  * @param {number} angries? - angries
+  //  * @param {number} sadness? - sadness
+  //  * @param {number} reports? - reports
    * @return {Promise<HydratedDocument<Freet>>} - The newly updated freet
    */
-  static async updateOne(freetId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
+
+  // content?: string, likes?: number, laughs?: number, loves?: number, angries?: number, sadness?: number, reports?: number
+  static async updateOne(freetId: Types.ObjectId | string, updateObj: any): Promise<HydratedDocument<Freet>> {
     const freet = await FreetModel.findOne({_id: freetId});
-    freet.content = content;
-    freet.dateModified = new Date();
+    if (updateObj.content) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.content = updateObj.content;
+      freet.dateModified = new Date();
+      freet.edited = true;
+    }
+
+    if (updateObj.likes) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.likes = updateObj.likes;
+    }
+
+    if (updateObj.laughs) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.laughs = updateObj.laughs;
+    }
+
+    if (updateObj.loves) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.loves = updateObj.loves;
+    }
+
+    if (updateObj.angries) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.angries = updateObj.angries;
+    }
+
+    if (updateObj.sadness) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.sadness = updateObj.sadness;
+    }
+
+    if (updateObj.reports) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      freet.reports = updateObj.reports;
+    }
+
     await freet.save();
     return freet.populate('authorId');
   }

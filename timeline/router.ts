@@ -26,7 +26,6 @@ router.put(
     const timelineObject = await TimelineCollection.updateTimeline(userId, req.body);
     res.status(201).json({
       message: 'Your Timeline object was successfuly changed.',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       timelineObj: util.constructTimelineResponse(timelineObject)
     });
   }
@@ -51,7 +50,6 @@ router.get(
     }
 
     const timeline = await TimelineCollection.findTimelineByUser(req.query.userId as string);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const response = util.constructTimelineResponse(timeline);
     res.status(200).json(response);
   }
