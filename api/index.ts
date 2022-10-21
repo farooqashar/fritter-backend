@@ -15,7 +15,7 @@ import {exampleFreetRouter} from '../exampleFreets/router';
 import {userRelationshipRouter} from '../relationships/router';
 import {enemiesRouter} from '../enemies/router';
 import {HOFRouter} from '../halloffame/router';
-import {credibilityCreditRouter} from '../credibilitycredits/router';
+import {credibilityCreditRouter} from '../credibilityCredits/router';
 import {followRouter} from '../follow/router';
 import {timelineRouter} from '../timeline/router';
 
