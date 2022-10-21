@@ -26,7 +26,6 @@ router.post(
     const followObj = await FollowCollection.addFollowObject(userId, req.body.following);
     res.status(201).json({
       message: 'Your Follow object was created successfully.',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       followObject: util.constructFollowResponse(followObj)
     });
   }
@@ -51,7 +50,6 @@ router.put(
     const newFollow = await FollowCollection.updateFollowing(userId, req.body);
     res.status(200).json({
       message: 'Your Following Users were updated successfully.',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       followObj: util.constructFollowResponse(newFollow)
     });
   }
@@ -76,7 +74,6 @@ router.get(
     }
 
     const followObject = await FollowCollection.findFollowingByUser(req.query.userId as string);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const response = util.constructFollowResponse(followObject);
     res.status(200).json(response);
   }
