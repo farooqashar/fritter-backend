@@ -17,6 +17,7 @@ import {enemiesRouter} from '../enemies/router';
 import {HOFRouter} from '../halloffame/router';
 import {credibilityCreditRouter} from '../credibilitycredits/router';
 import {followRouter} from '../follow/router';
+import {timelineRouter} from '../timeline/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -87,6 +88,7 @@ app.use('/api/users/enemies', enemiesRouter);
 app.use('/api/users/following', followRouter);
 app.use('/api/halloffame', HOFRouter);
 app.use('/api/users/credibilitycredits', credibilityCreditRouter);
+app.use('/api/timeline', timelineRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

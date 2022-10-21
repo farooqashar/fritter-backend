@@ -59,7 +59,9 @@ const formsAndHandlers = {
   'view-credibility-credits': getUserCredibility,
   'add-user-following': createUserFollowing,
   'update-user-following': updateUserFollowing,
-  'view-user-following': getUserFollowing
+  'view-user-following': getUserFollowing,
+  'update-personal-corporate': updateTimeline,
+  'view-personal-corporate': getTimelineByUser
 };
 
 // Attach handlers to forms

@@ -13,6 +13,7 @@
   <script src="/scripts/hof.js"></script>
   <script src="/scripts/credibility.js"></script>
   <script src="/scripts/follow.js"></script>
+  <script src="/scripts/timeline.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -285,6 +286,27 @@
           <input type="submit" value="View Users Your Are Following">
         </form>
 
+        <form id="update-personal-corporate">
+          <h3>Mark Users Personal or Corporate</h3>
+          <div>
+            <label for="personal">Personal Users (Enter user ids separated by comma): </label>
+            <input id="personal" name="personal">
+          </div>
+          <div>
+            <label for="corporate">Corporate Users (Enter user ids separated by comma): </label>
+            <input id="corporate" name="corporate">
+          </div>
+          <input type="submit" value="Mark Users Personal or Corporate">
+        </form>
+
+        <form id="view-personal-corporate">
+          <h3>View Personal or Corporate Users For a Given User</h3>
+          <div>
+            <label for="userId">User Id:</label>
+            <input id="userId" name="userId">
+          </div>
+          <input type="submit" value="View Personal or Corporate Users For a Given User">
+        </form>
       </div>
     </section>
     <section>
