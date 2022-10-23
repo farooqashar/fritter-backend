@@ -7,14 +7,12 @@ export type Credibility = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   user: Types.ObjectId;
   score: number;
-  verifiedColor: string;
 };
 
 export type CredibilityPopulated = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   user: Types.ObjectId;
   score: number;
-  verifiedColor: string;
 };
 
 const CredibilitySchema = new Schema<Credibility>({
@@ -28,10 +26,6 @@ const CredibilitySchema = new Schema<Credibility>({
   // Credibility Score
   score: {
     type: Number
-  },
-  // The color of the icon for verification on Fritter
-  verifiedColor: {
-    type: String
   }
 });
 

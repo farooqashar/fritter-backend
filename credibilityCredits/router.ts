@@ -28,7 +28,7 @@ router.put(
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
 
-    const updatedCredibilityObj = await CredibilityCollection.updateOne(userId, req.body.score, req.body.verifiedColor);
+    const updatedCredibilityObj = await CredibilityCollection.updateOne(userId, req.body.score);
     res.status(200).json({
       message: 'Your Credibility Credit was updated successfully.',
 

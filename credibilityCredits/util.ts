@@ -6,7 +6,6 @@ import type {Credibility, CredibilityPopulated} from '../credibilitycredits/mode
 type CredibilityResponse = {
   _id: string;
   score: number;
-  verifiedColor: string;
 };
 
 /**
