@@ -15,7 +15,7 @@ const isValidCredit = async (req: Request, res: Response, next: NextFunction) =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const {score} = req.body;
     if (score < 0) {
-      res.status(404).json({
+      res.status(400).json({
         error: 'Credibility Score cannot be negative'
       });
       return;
