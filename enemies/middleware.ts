@@ -13,7 +13,6 @@ import mongoose from 'mongoose';
 const isValidEnemies = async (req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const {enemies} = req.body;
-
   for (const enemy of enemies) {
     try {
       // eslint-disable-next-line no-await-in-loop, @typescript-eslint/no-unsafe-assignment
@@ -21,17 +20,6 @@ const isValidEnemies = async (req: Request, res: Response, next: NextFunction) =
       if (!actualUser) {
         res.status(404).json({
           error: `An enemy with id ${enemy as string} does not exist.`
-        });
-        return;
-      }
-
-      console.log('attempting to find enemy');
-      // eslint-disable-next-line no-await-in-loop
-      const potentialEnemy = await EnemiesCollection.findEnemiesByUser(enemy);
-
-      if (!potentialEnemy) {
-        res.status(404).json({
-          error: 'This user has no enemies.'
         });
         return;
       }
