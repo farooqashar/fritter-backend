@@ -112,6 +112,7 @@ router.put(
   [
     userValidator.isUserLoggedIn,
     userValidator.isValidUsername,
+    userValidator.isValidBio,
     userValidator.isUsernameNotAlreadyInUse,
     userValidator.isValidPassword
   ],

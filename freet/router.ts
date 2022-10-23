@@ -104,15 +104,16 @@ router.delete(
 /**
  * Modify a freet
  *
- * @name PUT /api/freets/:id
+ * @name PUT /api/freets/:freetId
  *
- * @param {string} content - the new content for the freet
+ * @param {string} req.body - the new updated content for the freet
  * @return {FreetResponse} - the updated freet
  * @throws {403} - if the user is not logged in or not the author of
  *                 of the freet
  * @throws {404} - If the freetId is not valid
  * @throws {400} - If the freet content is empty or a stream of empty spaces
  * @throws {413} - If the freet content is more than 140 characters long
+ * @throws {400} - If any of the likes,laughs,loves,angries,sadness,or reports are negative
  */
 router.put(
   '/:freetId?',
@@ -120,7 +121,8 @@ router.put(
     userValidator.isUserLoggedIn,
     freetValidator.isFreetExists,
     freetValidator.isValidFreetModifier,
-    freetValidator.isValidFreetContent
+    freetValidator.isValidFreetContent,
+    freetValidator.isValidFreetReactions
   ],
   async (req: Request, res: Response) => {
     const freet = await FreetCollection.updateOne(req.params.freetId, req.body);
