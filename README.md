@@ -331,7 +331,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**
 
 - `relationship_status` _{string}_ - The user's relationship status
-- `users` _{User}_ - The user's best friends list(set of other users)
+- `bestFriends` [_{string}_] - The user's best friends list of ids(set of other users)
 
 **Returns**
 - A success message
@@ -349,7 +349,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**(no need to add fields that are not being changed)
 
 - `relationship_status` _{string}_ - The user's relationship status
-- `users` _{User}_ - The user's best friends list(set of other users)
+- `bestFriends` [_{string}_] - The user's best friends list of ids(set of other users)
 
 **Returns**
 - A success message
@@ -377,7 +377,7 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `POST /api/users/enemies` - Add User Enemies
 
 **Body**
-- `enemies_list` _{Users}_ - The user's enemies list(set of other Users)
+- `enemies` [_{string}_] - The user's enemies list of ids(set of other Users)
 
 **Returns**
 - A success message
@@ -393,11 +393,11 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Body**(no need to add fields that are not being changed)
 
-- `enemies` _{User}_ - The user's enemies list(set of other users)
+- `enemies` [_{string}_] - The user's enemies list of ids(set of other Users)
 
 **Returns**
 - A success message
-- An object with the updated user's details (without password and with other user best friends)
+- An object with the updated user's details (without password and with other user enemies)
 
 **Throws**
 
@@ -433,7 +433,7 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/halloffame/freets` - Toggle Freets To and From Hall of Fame
 
 **Body**
-- `freeid` _{string}_ - The freet id to be toggled into the the hall of fame if it is not in there; otherwise, remove it from the hall of fame if it is inside hall of fame
+- `freetId` _{string}_ - The freet id to be toggled into the the hall of fame if it is not in there; otherwise, remove it from the hall of fame if it is inside hall of fame
 - `userId` _{string}_ - The user id of the user of the hall of fame
 
 **Returns**
@@ -504,8 +504,8 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/timeline` - Mark Users Personal or Corporate
 
 **Body**
-- `personal` _{Users}_ - An array of user ids that are personal to the user
-- `corporate` _{Users}_ - An array of user ids that are non-personal/corporate to the user
+- `personal` [_{string}_] - An array of user ids that are personal to the user
+- `corporate` [_{string}_] - An array of user ids that are non-personal/corporate to the user
 
 **Returns**
 - A success message
@@ -533,7 +533,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Body**(no need to add fields that are not being changed)
 
-- `credits` _{Number}_ - The user's updated credibility credits number (>= 0, validated and defaulted to 0 if negative)
+- `credits` _{Number}_ - The user's updated credibility credits number
 
 **Returns**
 - A success message
@@ -555,12 +555,12 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 - `400` if `userId` is not given
-- `404` if `user does not exist
+- `404` if user does not exist
 
 #### `POST /api/users/following` - Add Users Following
 
 **Body**
-- `following` _[{User}]_ - The list of user ids that the given user is following
+- `following` _[{string}]_ - The list of user ids that the given user is following
 
 **Returns**
 - A success message
@@ -576,7 +576,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Body**(no need to add fields that are not being changed)
 
-- `following` _[{User}]_ - The updated list of user ids that the given user is following
+- `following` _[{string}]_ - The updated list of user ids that the given user is following
 
 **Returns**
 - A success message
