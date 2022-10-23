@@ -3,6 +3,9 @@ import express from 'express';
 import HOFCollection from './collection';
 import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
+import * as hofValidator from '../halloffame/middleware';
+import * as freetValidator from '../freet/middleware';
+import * as relationsValidator from '../relationships/middleware';
 import * as util from './util';
 
 const router = express.Router();
@@ -19,7 +22,8 @@ const router = express.Router();
 router.post(
   '/',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    hofValidator.isInitializedHOF
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -44,7 +48,9 @@ router.post(
 router.put(
   '/freets',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    hofValidator.isNotInitializedHOF,
+    hofValidator.isFreetExists
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -67,8 +73,10 @@ router.put(
  *
  */
 router.get(
-  '/freets',
-  async (req: Request, res: Response) => {
+  '/freets', [
+    userValidator.isUserLoggedIn,
+    relationsValidator.isUserExisting
+  ], async (req: Request, res: Response) => {
     // Check if authorId query parameter was supplied
     if (req.query.userId === undefined) {
       return;
