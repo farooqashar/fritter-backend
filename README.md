@@ -197,6 +197,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**
 
 - `content` _{string}_ - The content of the freet
+- `source?` _{string}_ - The optional source of the freet
 
 **Returns**
 
@@ -221,11 +222,18 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
 
-#### `PUT /api/freets/:freetId?` - Update an existing freet (timed edit concept)
+#### `PUT /api/freets/:freetId?` - Update An Existing Freet 
 
 **Body**
 
 - `content` _{string}_ - The new content of the freet
+- `likes` _{Number}_ - The new likes of the freet
+- `laughs` _{Number}_ - The new laughs of the freet
+- `loves` _{Number}_ - The new loves of the freet
+- `angries` _{Number}_ - The new angries of the freet
+- `sadness` _{Number}_ - The new sadness of the freet
+- `reports` _{Number}_ - The new reports of the freet
+- `source` _{string}_ - The new source of the freet
 
 **Returns**
 
@@ -239,6 +247,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the freet
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
+- `400` if any of the likes,laughs,loves,angries,sadness,or reports are negative
 
 #### `POST /api/users/session` - Sign in user
 
@@ -292,6 +301,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
+- `bio` _{string}_ - The user's bio
 
 **Returns**
 
@@ -301,7 +311,8 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if username or password is in the wrong format
+- `400` if username or password or bio is in the wrong format
+- `400` if the bio is longer than 500 characters
 - `409` if the username is already in use
 
 #### `DELETE /api/users` - Delete user
@@ -329,8 +340,8 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if the relationship status is in wrong format
-- `400` if a user best friend does not exist
+- `400` if the relationship status is not in the appropiate set{Single, Complicated, Married}
+- `404` if a user best friend does not exist
 
 
 #### `PUT /api/users/relationships` - Update User Relationship Status
@@ -347,9 +358,10 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if a user best friend does not exist
+- `400` if the relationship status is not in the appropiate set{Single, Complicated, Married}
+- `404` if a user best friend does not exist
 
-#### `GET /api/users/relationships?user=USERNAME` - Get all relationships by a user
+#### `GET /api/users/relationships?user=USERNAME` - Get Relationship Status By A User
 
 **Returns**
 
@@ -359,6 +371,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 - `400` if `user` is not given
+- `404` if `user` does not exist
 
 
 #### `POST /api/users/enemies` - Add User Enemies
@@ -373,7 +386,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if a user enemy does not exist
+- `404` if a user enemy does not exist
 
 
 #### `PUT /api/users/enemies` - Update User Enemies
@@ -389,39 +402,24 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if a user enemy does not exist
+- `404` if a user enemy does not exist
 
-#### `GET /api/users/enemies?user=USERNAME` - Get all enemies by a user
+#### `GET /api/users/enemies?user=USERNAME` - Get User Enemies By a User
 
 **Returns**
 
-- An array of enemies for the user `user`
+- An object containing an array of enemies for the user `user`
 
 **Throws**
 
 - `403` if the user is not logged in
 - `400` if `user` is not given
+- `404` if `user` does not exist
 
-#### `POST /api/freets/halloffame` - Add Freets to Hall of Fame
-
-**Body**
-- `freeid` _{string}_ - The freet id to be placed into hall of fame
-
-**Returns**
-- A success message
-- An object with the user's freets that are in the hall of fame
-
-**Throws**
-
-- `403` if the user is not logged in
-- `400` if the freet does not exist
-- `400` if the freet already exists in the hall of fame
-
-
-#### `DELETE /api/freets/halloffame` - Delete Freets from Hall of Fame
+#### `POST /api/halloffame` - Initialize Hall of Fame
 
 **Body**
-- `freeid` _{string}_ - The freet id to be deleted from the hall of fame
+- `userId` _{string}_ - The user id of the user of the hall of fame
 
 **Returns**
 - A success message
@@ -429,18 +427,36 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+- `403` if hall of fame already exists for a user
 
 
-#### `GET /api/freets/halloffame?author=USERNAME` - Get all hall of fame freets by author
+#### `PUT /api/halloffame/freets` - Toggle Freets To and From Hall of Fame
+
+**Body**
+- `freeid` _{string}_ - The freet id to be toggled into the the hall of fame if it is not in there; otherwise, remove it from the hall of fame if it is inside hall of fame
+- `userId` _{string}_ - The user id of the user of the hall of fame
 
 **Returns**
-
-- An array of freets in the username `author`'s hall of fame
+- A success message
 
 **Throws**
 
-- `400` if `author` is not given
-- `404` if `author` is not a recognized username of any user
+- `403` if the user is not logged in
+- `404` if the freet does not exist
+- `404` if hall of fame for the user is not initialized
+
+
+#### `GET /api/freets/halloffame?userId=USERNAME` - Get Hall Of Fame Freets By User
+
+**Returns**
+
+- An object containing an array of freets in the user `userId`'s hall of fame
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if `userId` is not given
+- `404` if `userId` is not a recognized username of any user
 
 
 
@@ -456,10 +472,11 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if the format of an example freet is not correct
+- `400` If the freet content is empty or a stream of empty spaces
+- `413` If the freet content is more than 140 characters long
 
 
-#### `DELETE /api/exampleFreets` - Delete Example Freets
+#### `DELETE /api/exampleFreets/:id` - Delete Example Freets
 
 **Returns**
 
@@ -468,9 +485,11 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+- `403` if the user is not the author of the example freet
+- `404` if the freet id is invalid
 
 
-#### `GET /api/exampleFreets?author=${fields.author}` - Get all example freets by an author
+#### `GET /api/exampleFreets?author=AUTHOR` - Get Example Freets By author
 
 **Returns**
 
@@ -479,65 +498,42 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `400` if `author` is not given
+- `404` if `author` is not a recognized username of any user
 
 
-#### `POST /api/users/personal` - Mark users personal 
+#### `PUT /api/timeline` - Mark Users Personal or Corporate
 
 **Body**
-- `users` _{Users}_ - An array of users to be marked as personal
+- `personal` _{Users}_ - An array of user ids that are personal to the user
+- `corporate` _{Users}_ - An array of user ids that are non-personal/corporate to the user
 
 **Returns**
 - A success message
-- An array of users with their marked statuses
+- An object representing personal and corporate users
 
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if any of the users don't exist
+- `404` if any of the users don't exist
 
 
-#### `POST /api/users/corporate` - Mark users corporate 
-
-**Body**
-- `users` _{Users}_ - An array of users to be marked as corporate
+#### `GET /api/timeline?userId=id` - Get User Timeline By User 
 
 **Returns**
-- A success message
-- An array of users with their marked statuses
+- An object representing personal and corporate users
 
 **Throws**
 
 - `403` if the user is not logged in
-- `400` if any of the users don't exist
-
-
-#### `GET /api/freets/personal?author=USERNAME` - Get all personal freets by author 
-
-**Returns**
-
-- An array of freets that are marked as personal by the author `author` (which is automated with the marking of users as all freets by a user marked personal are also personal)
-
-**Throws**
-
-- `400` if `author` is not given
-
-
-#### `GET /api/freets/corporate?author=USERNAME` - Get all corporate freets by author 
-
-**Returns**
-
-- An array of freets that are marked as corporate by the author `author` (which is automated with the marking of users as all freets by a user marked corporate are also corporate)
-
-**Throws**
-
-- `400` if `author` is not given
+- `400` if `userId` is not given
+- `404` if `userId` does not exist
 
 
 #### `PUT /api/users/credibilitycredits` - Update User Credibility Credits
 
 **Body**(no need to add fields that are not being changed)
 
-- `credits` _{Number}_ - The user's updated credibility credits number
+- `credits` _{Number}_ - The user's updated credibility credits number (>= 0, validated and defaulted to 0 if negative)
 
 **Returns**
 - A success message
@@ -546,14 +542,59 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+- `400` if the credits is negative
 
 
-#### `GET /api/users/credibilitycredits?author=USERNAME` - Get crediblity credits for an author
+#### `GET /api/users/credibilitycredits?userId=id` - Get Crediblity Credits By User
 
 **Returns**
 
-- An object of crediblity credits number and a status as to the color of the verified Twitter icon
+- An object of crediblity credits number 
 
 **Throws**
 
-- `400` if `author` is not given
+- `403` if the user is not logged in
+- `400` if `userId` is not given
+- `404` if `user does not exist
+
+#### `POST /api/users/following` - Add Users Following
+
+**Body**
+- `following` _[{User}]_ - The list of user ids that the given user is following
+
+**Returns**
+- A success message
+- An object with the user's following list
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if any of the users do not exist
+
+
+#### `PUT /api/users/following` - Update User Following
+
+**Body**(no need to add fields that are not being changed)
+
+- `following` _[{User}]_ - The updated list of user ids that the given user is following
+
+**Returns**
+- A success message
+- An object with the updated user's following
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if any of the users do not exist
+
+#### `/api/users/following?userId=id` - Get User Following By a User
+
+**Returns**
+
+- An object containing an array of users that the user is following 
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if `userId` is not given
+- `404` if `userId` does not exist
