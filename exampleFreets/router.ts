@@ -22,13 +22,14 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if authorId query parameter was supplied
     if (req.query.author === undefined) {
-      res.status(400).json('{error: authorId is not provided}');
+      res.status(400).json('{error: user is not provided}');
     }
 
     next();
   },
   [
-    userValidator.isAuthorExists
+    userValidator.isAuthorExists,
+    userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
     const authorExampleFreets = await ExampleFreetCollection.findAllByUsername(req.query.author as string);
@@ -50,7 +51,8 @@ router.get(
 router.post(
   '/',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    exampleFreetValidator.isValidExampleFreetContent
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -75,7 +77,9 @@ router.post(
 router.delete(
   '/:exampleFreetId?',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    exampleFreetValidator.isExampleFreetExists,
+    exampleFreetValidator.isValidFreetModifier
   ],
   async (req: Request, res: Response) => {
     await ExampleFreetCollection.deleteOne(req.params.exampleFreetId);
