@@ -3,6 +3,7 @@ import express from 'express';
 import UserRelationshipCollection from './collection';
 import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
+import * as relationshipValidator from '../relationships/middleware';
 import * as util from './util';
 
 const router = express.Router();
@@ -16,11 +17,15 @@ const router = express.Router();
  * @param {string[]} bestFriends - The list of best friends(users) ids for a user
  * @return {UserRelationshipObjectResponse} - The created userRelationshipObject
  * @throws {403} - If the user is not logged in
+ * @throws {400} - the relationship status is not in the appropiate set{Single, Complicated, Married}
+ * @throws {404} - If a user best friend does not exist
  */
 router.post(
   '/',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    relationshipValidator.isValidRelationshipStatus,
+    relationshipValidator.isValidBestFriends
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -44,7 +49,8 @@ router.post(
 router.put(
   '/',
   [
-    userValidator.isUserLoggedIn
+    userValidator.isUserLoggedIn,
+    relationshipValidator.isValidBestFriends
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
@@ -70,9 +76,16 @@ router.put(
  */
 router.get(
   '/',
+  [
+    userValidator.isUserLoggedIn,
+    relationshipValidator.isUserExisting
+  ],
   async (req: Request, res: Response) => {
     // Check if authorId query parameter was supplied
     if (req.query.userId === undefined) {
+      res.status(400).json({
+        error: 'Provided userId must be nonempty.'
+      });
       return;
     }
 

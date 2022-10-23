@@ -48,15 +48,12 @@ const isValidUsername = (req: Request, res: Response, next: NextFunction) => {
  * Checks if a user bio is valid
  */
 const isValidBio = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('bio');
   if (req.body.bio) {
     const {bio} = req.body as {bio: string};
-    console.log(bio);
     if (bio.length > 500) {
       res.status(400).json({error: 'User bio cannot be more than 500 characters'});
+      return;
     }
-
-    return;
   }
 
   next();
