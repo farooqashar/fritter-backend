@@ -175,11 +175,15 @@ The following api routes have already been implemented for you (**Make sure to d
 
 This renders the `index.html` file that will be used to interact with the backend
 
+<br>
+
 #### `GET /api/freets` - Get all the freets
 
 **Returns**
 
 - An array of all freets sorted in descending order by date modified
+
+<br>
 
 #### `GET /api/freets?author=USERNAME` - Get freets by author
 
@@ -191,6 +195,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
+
+<br>
 
 #### `POST /api/freets` - Create a new freet
 
