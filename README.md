@@ -216,6 +216,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
 
+<br>
+
 #### `DELETE /api/freets/:freetId?` - Delete an existing freet
 
 **Returns**
@@ -227,6 +229,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
+
+<br>
 
 #### `PUT /api/freets/:freetId?` - Update An Existing Freet 
 
@@ -255,6 +259,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `413` if the new freet content is more than 140 characters long
 - `400` if any of the likes,laughs,loves,angries,sadness,or reports are negative
 
+<br>
+
 #### `POST /api/users/session` - Sign in user
 
 **Body**
@@ -273,6 +279,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if username or password is not in correct format format or missing in the req
 - `401` if the user login credentials are invalid
 
+<br>
+
 #### `DELETE /api/users/session` - Sign out user
 
 **Returns**
@@ -282,6 +290,8 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if user is not logged in
+
+<br>
 
 #### `POST /api/users` - Create an new user account
 
@@ -300,6 +310,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if there is a user already logged in
 - `400` if username or password is in the wrong format
 - `409` if username is already in use
+
+<br>
 
 #### `PUT /api/users` - Update a user's profile
 
@@ -321,6 +333,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the bio is longer than 500 characters
 - `409` if the username is already in use
 
+<br>
+
 #### `DELETE /api/users` - Delete user
 
 **Returns**
@@ -331,6 +345,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
+<br>
 
 #### `POST /api/users/relationships` - Add User Relationship Status
 
@@ -349,6 +364,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the relationship status is not in the appropiate set{Single, Complicated, Married}
 - `404` if a user best friend does not exist
 
+<br>
 
 #### `PUT /api/users/relationships` - Update User Relationship Status
 
@@ -367,6 +383,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the relationship status is not in the appropiate set{Single, Complicated, Married}
 - `404` if a user best friend does not exist
 
+<br>
+
 #### `GET /api/users/relationships?user=USERNAME` - Get Relationship Status By A User
 
 **Returns**
@@ -379,6 +397,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `user` is not given
 - `404` if `user` does not exist
 
+<br>
 
 #### `POST /api/users/enemies` - Add User Enemies
 
@@ -394,6 +413,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if a user enemy does not exist
 
+<br>
 
 #### `PUT /api/users/enemies` - Update User Enemies
 
@@ -410,6 +430,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if a user enemy does not exist
 
+<br>
+
 #### `GET /api/users/enemies?user=USERNAME` - Get User Enemies By a User
 
 **Returns**
@@ -421,6 +443,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `user` is not given
 - `404` if `user` does not exist
+
+<br>
 
 #### `POST /api/halloffame` - Initialize Hall of Fame
 
@@ -435,6 +459,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `403` if hall of fame already exists for a user
 
+<br>
 
 #### `PUT /api/halloffame/freets` - Toggle Freets To and From Hall of Fame
 
@@ -451,6 +476,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if the freet does not exist
 - `404` if hall of fame for the user is not initialized
 
+<br>
 
 #### `GET /api/freets/halloffame?userId=USERNAME` - Get Hall Of Fame Freets By User
 
@@ -464,7 +490,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `userId` is not given
 - `404` if `userId` is not a recognized username of any user
 
-
+<br>
 
 #### `POST /api/exampleFreets` - Add Example Freets
 
@@ -481,6 +507,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
 
+<br>
 
 #### `DELETE /api/exampleFreets/:id` - Delete Example Freets
 
@@ -494,6 +521,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not the author of the example freet
 - `404` if the freet id is invalid
 
+<br>
 
 #### `GET /api/exampleFreets?author=AUTHOR` - Get Example Freets By author
 
@@ -506,6 +534,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
 
+<br>
 
 #### `PUT /api/timeline` - Mark Users Personal or Corporate
 
@@ -522,6 +551,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if any of the users don't exist
 
+<br>
 
 #### `GET /api/timeline?userId=id` - Get User Timeline By User 
 
@@ -534,6 +564,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `userId` is not given
 - `404` if `userId` does not exist
 
+<br>
 
 #### `PUT /api/users/credibilitycredits` - Update User Credibility Credits
 
@@ -550,6 +581,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if the credits is negative
 
+<br>
 
 #### `GET /api/users/credibilitycredits?userId=id` - Get Crediblity Credits By User
 
@@ -562,6 +594,8 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `400` if `userId` is not given
 - `404` if user does not exist
+
+<br>
 
 #### `POST /api/users/following` - Add Users Following
 
@@ -577,6 +611,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if any of the users do not exist
 
+<br>
 
 #### `PUT /api/users/following` - Update User Following
 
@@ -592,6 +627,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 - `404` if any of the users do not exist
+
+<br>
 
 #### `/api/users/following?userId=id` - Get User Following By a User
 
