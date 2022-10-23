@@ -35,7 +35,7 @@ const isValidBestFriends = async (req: Request, res: Response, next: NextFunctio
 
     for (const eachFriend of bestFriends) {
       try {
-      // eslint-disable-next-line no-await-in-loop, @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line no-await-in-loop, @typescript-eslint/no-unsafe-assignment
         const actualUser = await UserModel.findOne({_id: eachFriend});
         if (!actualUser) {
           res.status(404).json({

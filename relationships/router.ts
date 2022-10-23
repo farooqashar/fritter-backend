@@ -50,6 +50,7 @@ router.put(
   '/',
   [
     userValidator.isUserLoggedIn,
+    relationshipValidator.isValidRelationshipStatus,
     relationshipValidator.isValidBestFriends
   ],
   async (req: Request, res: Response) => {
