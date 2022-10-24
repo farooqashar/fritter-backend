@@ -1,6 +1,6 @@
 import type {HydratedDocument} from 'mongoose';
 import moment from 'moment';
-import type {Credibility, CredibilityPopulated} from '../credibilitycredits/model';
+import type {Credibility, CredibilityPopulated} from '../credibilityCredits/model';
 
 // Update this if you add a property to the Credibility Credit type!
 type CredibilityResponse = {
