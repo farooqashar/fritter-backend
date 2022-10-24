@@ -22,7 +22,7 @@ const isValidPersonal = async (req: Request, res: Response, next: NextFunction) 
           // eslint-disable-next-line max-depth
           if (!actualUser) {
             res.status(404).json({
-              error: `A personal user with id ${eachPersonal as string} does not exist.`
+              error: {invalidUser: `A personal user with id ${eachPersonal as string} does not exist.`}
             });
             return;
           }
@@ -30,7 +30,7 @@ const isValidPersonal = async (req: Request, res: Response, next: NextFunction) 
           // eslint-disable-next-line max-depth
           if (eachPersonal) {
             res.status(404).json({
-              error: `A personal user with id ${eachPersonal as string} does not exist.`
+              error: {invalidUser: `A personal user with id ${eachPersonal as string} does not exist.`}
             });
             return;
           }
@@ -59,13 +59,13 @@ const isValidCorporate = async (req: Request, res: Response, next: NextFunction)
           // eslint-disable-next-line max-depth
           if (!actualUser) {
             res.status(404).json({
-              error: `A corporate user with id ${eachCorporate as string} does not exist.`
+              error: {invalidUser: `A corporate user with id ${eachCorporate as string} does not exist.`}
             });
             return;
           }
         } catch (err: unknown) {
           res.status(404).json({
-            error: `A corporate user with id ${eachCorporate as string} does not exist.`
+            error: {invalidUser: `A corporate user with id ${eachCorporate as string} does not exist.`}
           });
           return;
         }

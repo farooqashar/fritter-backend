@@ -20,13 +20,13 @@ const isValidFollowing = async (req: Request, res: Response, next: NextFunction)
         const actualUser = await UserModel.findOne({_id: eachFollowing});
         if (!actualUser) {
           res.status(404).json({
-            error: `A user with id ${eachFollowing as string} does not exist.`
+            error: {noValidUser: `A user with id ${eachFollowing as string} does not exist.`}
           });
           return;
         }
       } catch (err: unknown) {
         res.status(404).json({
-          error: `An enemy with id ${eachFollowing as string} does not exist.`
+          error: {noValidUser: `A user with id ${eachFollowing as string} does not exist.`}
         });
         return;
       }

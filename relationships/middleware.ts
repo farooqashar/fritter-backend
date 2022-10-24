@@ -17,7 +17,7 @@ const isValidRelationshipStatus = async (req: Request, res: Response, next: Next
   const {relationshipStatus} = req.body;
   if (!validRelationships.has(relationshipStatus)) {
     res.status(400).json({
-      error: 'Not a valid relationship status. It must be either single,married, or complicated.'
+      error: {invalidRelationshipStatus: 'Not a valid relationship status. It must be either single,married, or complicated.'}
     });
     return;
   }
@@ -39,13 +39,13 @@ const isValidBestFriends = async (req: Request, res: Response, next: NextFunctio
         const actualUser = await UserModel.findOne({_id: eachFriend});
         if (!actualUser) {
           res.status(404).json({
-            error: `A best friend with id ${eachFriend as string} does not exist.`
+            error: {invalidUser: `A best friend with id ${eachFriend as string} does not exist.`}
           });
           return;
         }
       } catch (err: unknown) {
         res.status(404).json({
-          error: `A best friend with id ${eachFriend as string} does not exist.`
+          error: {invalidUser: `A best friend with id ${eachFriend as string} does not exist.`}
         });
         return;
       }
@@ -63,13 +63,13 @@ const isUserExisting = async (req: Request, res: Response, next: NextFunction) =
     const actualUser = await UserModel.findOne({_id: req.query.userId});
     if (!actualUser) {
       res.status(404).json({
-        error: `A user with id ${req.query.userId as string} does not exist.`
+        error: {invalidUser: `A user with id ${req.query.userId as string} does not exist.`}
       });
       return;
     }
   } catch (err: unknown) {
     res.status(404).json({
-      error: `A user with id ${req.query.userId as string} does not exist.`
+      error: {invalidUser: `A user with id ${req.query.userId as string} does not exist.`}
     });
     return;
   }

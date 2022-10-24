@@ -86,7 +86,7 @@ const isAccountExists = async (req: Request, res: Response, next: NextFunction) 
   const {username, password} = req.body as {username: string; password: string};
 
   if (!username || !password) {
-    res.status(400).json({error: `Missing ${username ? 'password' : 'username'} credentials for sign in.`});
+    res.status(400).json({error: {invalidAccount: `Missing ${username ? 'password' : 'username'} credentials for sign in.`}});
     return;
   }
 
@@ -97,7 +97,7 @@ const isAccountExists = async (req: Request, res: Response, next: NextFunction) 
   if (user) {
     next();
   } else {
-    res.status(401).json({error: 'Invalid user login credentials provided.'});
+    res.status(401).json({error: {invalidCredentials: 'Invalid user login credentials provided.'}});
   }
 };
 
@@ -148,7 +148,7 @@ const isUserLoggedIn = (req: Request, res: Response, next: NextFunction) => {
 const isUserLoggedOut = (req: Request, res: Response, next: NextFunction) => {
   if (req.session.userId) {
     res.status(403).json({
-      error: 'You are already signed in.'
+      error: {login: 'You are already signed in.'}
     });
     return;
   }
@@ -162,7 +162,7 @@ const isUserLoggedOut = (req: Request, res: Response, next: NextFunction) => {
 const isAuthorExists = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.query.author) {
     res.status(400).json({
-      error: 'Provided author username must be nonempty.'
+      error: {emptyUsername: 'Provided author username must be nonempty.'}
     });
     return;
   }
@@ -170,7 +170,7 @@ const isAuthorExists = async (req: Request, res: Response, next: NextFunction) =
   const user = await UserCollection.findOneByUsername(req.query.author as string);
   if (!user) {
     res.status(404).json({
-      error: `A user with username ${req.query.author as string} does not exist.`
+      error: {invalidUser: `A user with username ${req.query.author as string} does not exist.`}
     });
     return;
   }

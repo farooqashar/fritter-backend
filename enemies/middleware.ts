@@ -19,13 +19,13 @@ const isValidEnemies = async (req: Request, res: Response, next: NextFunction) =
       const actualUser = await UserModel.findOne({_id: enemy});
       if (!actualUser) {
         res.status(404).json({
-          error: `An enemy with id ${enemy as string} does not exist.`
+          error: {enemyNotFound: `An enemy with id ${enemy as string} does not exist.`}
         });
         return;
       }
     } catch (err: unknown) {
       res.status(404).json({
-        error: `An enemy with id ${enemy as string} does not exist.`
+        error: {enemyNotFound: `An enemy with id ${enemy as string} does not exist.`}
       });
       return;
     }

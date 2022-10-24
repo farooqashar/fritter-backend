@@ -19,7 +19,7 @@ const isInitializedHOF = async (req: Request, res: Response, next: NextFunction)
     if (actualHOF) {
       res.status(403).json({
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        error: `Hall of Fame already exists for user with user id ${req.session.userId}`
+        error: {hofExists: `Hall of Fame already exists for user with user id ${req.session.userId}`}
       });
       return;
     }
@@ -40,14 +40,14 @@ const isNotInitializedHOF = async (req: Request, res: Response, next: NextFuncti
     if (!actualHOF) {
       res.status(404).json({
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        error: `Hall of Fame does not exists for user with user id ${req.session.userId}.`
+        error: {noHof: `Hall of Fame does not exists for user with user id ${req.session.userId}.`}
       });
       return;
     }
   } catch (err: unknown) {
     res.status(404).json({
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      error: `Hall of Fame does not exists for user with user id ${req.session.userId}.`
+      error: {noHof: `Hall of Fame does not exists for user with user id ${req.session.userId}.`}
     });
     return;
   }
@@ -64,14 +64,14 @@ const isFreetExists = async (req: Request, res: Response, next: NextFunction) =>
     if (!freet) {
       res.status(404).json({
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        error: `Freet with freet ID ${req.body.freetId} does not exist.`
+        error: {noFreetFound: `Freet with freet ID ${req.body.freetId} does not exist.`}
       });
       return;
     }
   } catch (err: unknown) {
     res.status(404).json({
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      error: `Freet with freet ID ${req.body.freetId} does not exist.`
+      error: {noFreetFound: `Freet with freet ID ${req.body.freetId} does not exist.`}
     });
     return;
   }
