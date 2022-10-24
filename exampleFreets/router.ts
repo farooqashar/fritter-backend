@@ -22,7 +22,7 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     // Check if authorId query parameter was supplied
     if (req.query.author === undefined) {
-      res.status(400).json('{error: user is not provided}');
+      res.status(400).json({error: 'user is not provided'});
     }
 
     next();
@@ -33,7 +33,8 @@ router.get(
   ],
   async (req: Request, res: Response) => {
     const authorExampleFreets = await ExampleFreetCollection.findAllByUsername(req.query.author as string);
-    res.status(200).json(authorExampleFreets);
+    const response = authorExampleFreets.map(util.constructExampleFreetResponse);
+    res.status(200).json(response);
   }
 );
 
