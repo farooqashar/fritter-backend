@@ -12,14 +12,14 @@ const isValidExampleFreetContent = (req: Request, res: Response, next: NextFunct
   const {content} = req.body as {content: string};
   if (!content.trim()) {
     res.status(400).json({
-      error: 'Example Freet content must be at least one character long.'
+      error: 'Example Freet content must be at least one character long. It is currently empty.'
     });
     return;
   }
 
   if (content.length > 140) {
     res.status(413).json({
-      error: 'Example Freet content must be no more than 140 characters.'
+      error: `Example Freet content must be no more than 140 characters. It is currently ${content.length} characters.`
     });
     return;
   }
@@ -35,14 +35,12 @@ const isExampleFreetExists = async (req: Request, res: Response, next: NextFunct
     const freet = await ExampleFreetModel.findOne({_id: req.params.exampleFreetId});
     if (!freet) {
       res.status(404).json({
-
         error: `Freet with freet ID ${req.params.exampleFreetId} does not exist.`
       });
       return;
     }
   } catch (err: unknown) {
     res.status(404).json({
-
       error: `Freet with freet ID ${req.params.exampleFreetId} does not exist.`
     });
     return;

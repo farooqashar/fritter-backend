@@ -18,7 +18,8 @@ const isInitializedHOF = async (req: Request, res: Response, next: NextFunction)
     const actualHOF = await HOFModel.findOne({user: req.session.userId});
     if (actualHOF) {
       res.status(403).json({
-        error: 'Hall of Fame already exists.'
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        error: `Hall of Fame already exists for user with user id ${req.session.userId}`
       });
       return;
     }
@@ -38,13 +39,15 @@ const isNotInitializedHOF = async (req: Request, res: Response, next: NextFuncti
     const actualHOF = await HOFModel.findOne({user: req.session.userId});
     if (!actualHOF) {
       res.status(404).json({
-        error: 'Hall of Fame does not exists.'
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        error: `Hall of Fame does not exists for user with user id ${req.session.userId}.`
       });
       return;
     }
   } catch (err: unknown) {
     res.status(404).json({
-      error: 'Hall of Fame does not exists.'
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      error: `Hall of Fame does not exists for user with user id ${req.session.userId}.`
     });
     return;
   }

@@ -28,14 +28,14 @@ const isValidFreetContent = (req: Request, res: Response, next: NextFunction) =>
   const {content} = req.body as {content: string};
   if (!content.trim()) {
     res.status(400).json({
-      error: 'Freet content must be at least one character long.'
+      error: 'Freet content must be at least one character long. It is currently empty.'
     });
     return;
   }
 
   if (content.length > 140) {
     res.status(413).json({
-      error: 'Freet content must be no more than 140 characters.'
+      error: `Freet content must be no more than 140 characters. It is currently ${content.length} characters`
     });
     return;
   }
@@ -56,42 +56,42 @@ const isValidFreetReactions = (req: Request, res: Response, next: NextFunction) 
 
   if (likes < 0) {
     res.status(400).json({
-      error: 'Freet likes must be non-negative'
+      error: `Freet likes must be non-negative. It is currently ${likes}.`
     });
     return;
   }
 
   if (laughs < 0) {
     res.status(400).json({
-      error: 'Freet laughs must be non-negative'
+      error: `Freet laughs must be non-negative. It is currently ${laughs}.`
     });
     return;
   }
 
   if (loves < 0) {
     res.status(400).json({
-      error: 'Freet loves must be non-negative'
+      error: `Freet loves must be non-negative. It is currently ${loves}.`
     });
     return;
   }
 
   if (angries < 0) {
     res.status(400).json({
-      error: 'Freet angries must be non-negative'
+      error: `Freet angries must be non-negative. It is currently ${angries}.`
     });
     return;
   }
 
   if (sadness < 0) {
     res.status(400).json({
-      error: 'Freet sadness must be non-negative'
+      error: `Freet sadness must be non-negative. It is currently ${sadness}.`
     });
     return;
   }
 
   if (reports < 0) {
     res.status(400).json({
-      error: 'Freet reports must be non-negative'
+      error: `Freet reports must be non-negative. It is currently ${reports}.`
     });
     return;
   }

@@ -17,7 +17,7 @@ const isValidRelationshipStatus = async (req: Request, res: Response, next: Next
   const {relationshipStatus} = req.body;
   if (!validRelationships.has(relationshipStatus)) {
     res.status(400).json({
-      error: 'Not a valid relationship status'
+      error: 'Not a valid relationship status. It must be either single,married, or complicated.'
     });
     return;
   }

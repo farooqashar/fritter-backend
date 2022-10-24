@@ -34,7 +34,8 @@ const isValidUsername = (req: Request, res: Response, next: NextFunction) => {
     if (!usernameRegex.test(req.body.username)) {
       res.status(400).json({
         error: {
-          username: 'Username must be a nonempty alphanumeric string.'
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          username: `Username must be a nonempty alphanumeric string. It is currently ${req.body.username}`
         }
       });
       return;
@@ -51,7 +52,7 @@ const isValidBio = async (req: Request, res: Response, next: NextFunction) => {
   if (req.body.bio) {
     const {bio} = req.body as {bio: string};
     if (bio.length > 500) {
-      res.status(400).json({error: 'User bio cannot be more than 500 characters'});
+      res.status(400).json({error: {bio: `User bio cannot be more than 500 characters. It is currently ${bio.length} characters`}});
       return;
     }
   }
@@ -68,7 +69,7 @@ const isValidPassword = (req: Request, res: Response, next: NextFunction) => {
     if (!passwordRegex.test(req.body.password)) {
       res.status(400).json({
         error: {
-          password: 'Password must be a nonempty string.'
+          password: 'Password must be a nonempty string. It is currently empty.'
         }
       });
       return;
@@ -116,7 +117,8 @@ const isUsernameNotAlreadyInUse = async (req: Request, res: Response, next: Next
 
     res.status(409).json({
       error: {
-        username: 'An account with this username already exists.'
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        username: `An account with this username ${req.body.username} already exists.`
       }
     });
   }
